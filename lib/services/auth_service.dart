@@ -5,10 +5,20 @@ class AuthService {
 
   // login
 
-  // Register 
-  Future registerUserWithEmailandPassword(String fullname, String email, String password) async{
-    
+  // Register
+  Future registerUserWithEmailandPassword(
+      String fullname, String email, String password) async {
+    try {
+      User user = (await firebaseAuth.createUserWithEmailAndPassword(
+              email: email, password: password))
+          .user!;
+      if (user != null) {
+        return true;
+      }
+    } on FirebaseAuthException catch (e) {
+      print(e);
+    }
   }
 
-  // signout 
+  // signout
 }
