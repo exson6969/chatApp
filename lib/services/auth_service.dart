@@ -1,3 +1,4 @@
+import 'package:chatapp/services/database_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class AuthService {
@@ -13,10 +14,12 @@ class AuthService {
               email: email, password: password))
           .user!;
       if (user != null) {
+        await DatabaseService(uid: user.uid).updateUserData(fullname, email);
         return true;
       }
     } on FirebaseAuthException catch (e) {
       print(e);
+      return e;
     }
   }
 
