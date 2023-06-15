@@ -24,4 +24,7 @@ class AuthService {
   }
 
   // signout
+  try{
+    
+  }
 }
